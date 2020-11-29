@@ -1,3 +1,7 @@
   
 # Directories #
 /node_modules
+
+/express/config/config.json
+/express/config/dev.js
+/express/config/jwt.js
