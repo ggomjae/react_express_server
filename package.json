@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ggomjae/react_express_server/issues"
   },
-  "homepage": "https://github.com/ggomjae/react_express_server#readme"
+  "homepage": "https://github.com/ggomjae/react_express_server#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
