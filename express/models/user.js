@@ -1,20 +1,30 @@
 module.exports = (sequelize, Sequelize) => {
-  return sequelize.define('user', {
-      name: {
-          type: Sequelize.STRING,
-          allowNull: false
-      },
-      email: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          unique: true
-      },
-      password: {
-          type: Sequelize.STRING(128),
-          allowNull: false
-      },
-      token: {
-          type: Sequelize.INTEGER
-      }
+  return sequelize.define('users', {
+    uno: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    name: {
+      // 일반적으로 255 or 20 으로 하는데 20으로 설정
+      type: Sequelize.STRING(20),
+      allowNull: false,
+    },
+    password: {
+      // bcrypt 128
+      type: Sequelize.STRING(128),
+      allowNull: false
+    },
+    email: {
+      //local 64, @ 1 , domain 255
+      type: Sequelize.STRING(320),
+      allowNull: false,
+      unique: true
+    },
+    roles: {
+      type: Sequelize.STRING(20),
+      allowNull: false
+    }
   }, { timestamps: true });
 }
