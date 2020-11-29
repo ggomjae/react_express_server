@@ -12,7 +12,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.users = require('./user')(sequelize, Sequelize);
+db.User = require('./user')(sequelize, Sequelize);
 
 // db 안에는 sequlize package, instance, model에 대한 정의
 module.exports = db;
