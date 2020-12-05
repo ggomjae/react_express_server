@@ -9,4 +9,7 @@ router.get('/:uno', userController.retrieveUser);
 router.patch('/:uno',userController.updateUser);
 router.delete('/:uno',userController.deleteUser);
 
+// login
+router.post('/login', userController.loginUser);
+
 module.exports = router;

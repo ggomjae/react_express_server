@@ -35,6 +35,18 @@ const createUser = (req, res) => {
   });
 }
 
+// 사용자 로그인하는 메소드는 부르는
+const loginUser = (req, res) => {
+  
+  userService.loginUser(req.body.email, req.body.password)
+  .then((success) => {
+      res.json(success);
+  })
+  .catch((fail) => {
+      res.json(fail);
+  });
+}
+
 // 패스워드를 업데이트 하는 메소드를 부르는
 const updateUser = (req, res) => {
   userService.updateUser(req.params.uno, req.body.password)
@@ -62,5 +74,6 @@ module.exports = {
   retrieveUser,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  loginUser
 };
