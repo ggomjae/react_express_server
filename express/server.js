@@ -15,10 +15,8 @@ db.sequelize.sync();
 
 // URI 
 app.use(express.json()) // body-parser 대신에 가능
+app.use('/', require("./routes/other"));
 app.use('/users', require("./routes/user"));
-app.use('/', (req, res) => {
-  res.send('Hello World!');
-})
 
 app.listen(port, () => {
   console.log(`🚀  Server ready at ${port}`);
