@@ -140,7 +140,7 @@ const deleteUser = (uno) => {
 }
 
 /////////////////////////////////////////////////
-//              Token 생성 로직                 //
+//              Token 관련 로직                 //
 /////////////////////////////////////////////////
 
 // User make Token - jwt.sign(payload, secret, options, [callback]) , default : HS256
@@ -164,11 +164,29 @@ const getToken = (email, password) => {
   });  // return promise
 }
 
+// User verify Token
+const verifytoken = (token) => {
+
+  const clientToken = token;
+
+  return new Promise((resolve, reject) => {
+    // 임시 비밀키, verify를 이용하여 유효한지 검사
+    jwt.verify(clientToken, jwtObj.secret,(err,decoded) => {
+      if(err){
+        reject(err);   // 만료 or 형식에 맞지 않는 경우 ERROR 
+      }       
+      else resolve(decoded);
+    }); 
+  });
+}
+
+
 module.exports = {
     userList,
     retrieveUser,
     createUser,
     loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    verifytoken
 };
