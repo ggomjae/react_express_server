@@ -2,7 +2,7 @@ const userService = require('../services/user');
 
 // 모든 유저를 갖고오는 메소드를 부르는 
 const retrieveAllUser = (req, res) => {
-  userService.userList()
+  userService.retrieveAllUser()
   .then((result) => {
       res.status(200).json(result);
   })

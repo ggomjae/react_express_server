@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 const jwtObj = require('../config/jwt');
 
 // 모든 유저를 갖고 오는 메소드
-const userList = () => {
+const retrieveAllUser = () => {
   return new Promise((resolve, reject) => {
     User.findAll({})
       .then((users) => {
@@ -182,7 +182,7 @@ const verifytoken = (token) => {
 
 
 module.exports = {
-    userList,
+    retrieveAllUser,
     retrieveUser,
     createUser,
     loginUser,

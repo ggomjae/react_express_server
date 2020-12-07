@@ -13,6 +13,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = require('./user')(sequelize, Sequelize);
+db.Post = require('./post')(sequelize, Sequelize);
 
 // db 안에는 sequlize package, instance, model에 대한 정의
 module.exports = db;
