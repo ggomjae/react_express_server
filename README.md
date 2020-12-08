@@ -7,12 +7,17 @@ Express로 서버 개발 -> React 연동 <br>
 router.post('/login',userController.loginUser);
 ```
 
-```/users```
+```/users```와 ```/posts```
 ```bash
+// User
 router.post('/', userController.createUser);
 router.get('/', userController.retrieveAllUser);
 router.get('/:uno',auth, userController.retrieveUser);
 router.patch('/:uno',auth, userController.updateUser);
 router.delete('/:uno',auth, userController.deleteUser);
+
+// Post 
+router.post('/:uno/posts',postController.createPost);
+router.get('/:uno/posts',postController.retrieveAllPost);
 ```
 
