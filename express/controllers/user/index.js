@@ -1,4 +1,4 @@
-const userService = require('../services/user');
+const userService = require('../../services/user');
 
 // 모든 유저를 갖고오는 메소드를 부르는 
 const retrieveAllUser = (req, res) => {

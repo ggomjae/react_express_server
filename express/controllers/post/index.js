@@ -1,4 +1,4 @@
-const postService = require('../services/post');
+const postService = require('../../services/post');
 
 // 게시물 모두 갖고 오는 메소드
 const retrieveAllPost = (req, res) => {
