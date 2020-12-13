@@ -21,3 +21,10 @@ router.post('/:uno/posts',postController.createPost);
 router.get('/:uno/posts',postController.retrieveAllPost);
 ```
 
+```mocha``` 적용
+```bash
+"scripts": { 
+    "test": "SET \"NODE_ENV=test\" && mocha ./express/services/user/user.spec.js -w",
+    "start": "node ./express/server.js"
+  },
+```

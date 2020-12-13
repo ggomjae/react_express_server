@@ -1,10 +1,10 @@
 
-const { User } = require('../models');
+const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const jwt = require('jsonwebtoken')
-const jwtObj = require('../config/jwt');
+const jwtObj = require('../../config/jwt');
 
 // 모든 유저를 갖고 오는 메소드
 const retrieveAllUser = () => {
@@ -21,6 +21,7 @@ const retrieveAllUser = () => {
 
 // 유저를 갖고오는 메소드
 const retrieveUser = (user_id) => {
+
   return new Promise((resolve, reject) => {
     User.findOne({ where: {uno: user_id} })
       .then((user) => {

@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": { 
-    "test": "mocha ./express/controllers/user/user.spec.js -w",
+    "test": "SET \"NODE_ENV=test\" && mocha ./express/services/user/user.spec.js -w",
     "start": "node ./express/server.js"
   },
   "repository": {

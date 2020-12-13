@@ -14,7 +14,9 @@ const retrieveAllUser = (req, res) => {
 // 유저를 갖고오는 메소드
 const retrieveUser = (req, res) => {
   
-  userService.retrieveUser(req.params.uno)
+  const uno = req.params.uno;
+
+  userService.retrieveUser(uno)
   .then((result) => {
       res.status(200).json(result);
   })
@@ -28,7 +30,7 @@ const createUser = (req, res) => {
   
   userService.createUser(req)
   .then((success) => {
-      res.json(success);
+      res.status(201).json(success);
   })
   .catch((fail) => {
       res.json(fail);

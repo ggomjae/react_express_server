@@ -12,7 +12,9 @@ module.exports = {
       if(err) {
         console.error('MySQL connection error : ', err);
       } else {
-        console.log('MySQL is connected successfully !!');
+        if (process.env.NODE_ENV !== 'test') {
+          console.log('MySQL is connected successfully !!');
+        }
       }
     })
   }
