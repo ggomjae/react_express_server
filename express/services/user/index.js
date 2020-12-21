@@ -8,54 +8,77 @@ const jwtObj = require('../../config/jwt');
 
 // 모든 유저를 갖고 오는 메소드
 const retrieveAllUser = () => {
+  
   return new Promise((resolve, reject) => {
     User.findAll({})
       .then((users) => {
-        resolve(users);
+        resolve({
+          users,
+          status : true
+        });
       })
       .catch((err) => {
-        reject(err);
+        reject({
+          status: false,
+          message: err
+        });
       });
   });
 }
 
 // 유저를 갖고오는 메소드
-const retrieveUser = (user_id) => {
+const retrieveUser = req => {
+
+  const user_id = req.params.uno;
 
   return new Promise((resolve, reject) => {
     User.findOne({ where: {uno: user_id} })
       .then((user) => {
         if(!user) {
           reject({
-            status: false
+            status: false,
+            message: 'Not find User'
           });
         }
-        resolve(user);
+        resolve({
+          user,
+          status: true
+        });
       })
       .catch((err) => {
         reject({
-          status: false
+          status: false,
+          message: err
         });
       });
   });
 }  
 
 // 회원가입하는 메소드
-const createUser = (req) => {
+const createUser = req => {
   return new Promise((resolve, reject) => {
     
     const email = req.body.email; 
     const password = req.body.password;
     const name = req.body.name;
     
+    /*
+      찾았으면 넘어가야하는 로직인데 좀 이상함. 리팩토링해야함
+    */
     User.findOne({where : { 'email' : email }})
     .then((user) => {
       if(user){
-        resolve(false);
+        resolve({
+          status: false,
+          message: 'User exist'
+        });
       }
     })
     .catch((err) => {
-      reject(new Error("이메일 중복"));
+      reject({
+        status: false,
+        message: err
+      });
     })
 
     // 같은 email을 갖는 user가 없다면 DB에 user 생성 후, true를 반환
@@ -74,7 +97,8 @@ const createUser = (req) => {
         })
         .catch((err) => {
           reject({ 
-            status: false, message: err.errors[0].message 
+            status: false, 
+            message: err.errors[0].message 
           });
         });
     });
@@ -82,38 +106,63 @@ const createUser = (req) => {
 }
 
 // 로그인하는 메소드
-const loginUser = (email, password) => {
+const loginUser = req => {
+
+  const email = req.body.email;
+  const password = req.body.password;
 
   return new Promise((resolve, reject) => {
 
     // email 이 존재하지 않으면 false 반환, 존재하면 bcrypt.compare를 이용하여 password 검사
     User.findOne({where : { 'email' : email }})
       .then((user) => {
-        console.log(user.password);
-        if(!user) resolve(false)
-        else{
+        
+        if(!user){ 
+          resolve({
+            status: false,
+            message: 'Not find User'
+          })
+        }else{
           bcrypt.compare(password,user.password,function(err, res) {
-            if (err) reject(err)
+            if (err){
+              reject({
+                status: false,
+                message: err
+              })
+            } 
             
             //만약 일치하면 token return, 일치하지 않으면 false return, 
             if(res){
               getToken(email, password)     // token을 받아와서 반환
-                .then( (token) =>{
-                  resolve(token)
+                .then( token =>{
+                  resolve({
+                    token,
+                    status: true
+                  })
                 })
-            }else resolve(false)            
+            }else resolve({
+              status: false,
+              message: 'Not Match'
+            })            
           });
         }
       })
-      .catch((err) => {
-        reject(err);
+      .catch( err => {
+        reject({
+          status: true,
+          message: err
+        });
       })
   });
 }
 
 
 // 업데이트하는 메소드
-const updateUser = (uno, password) => {
+const updateUser = req => {
+
+  const uno = req.params.uno;
+  const password = req.body.password;
+
   return new Promise((resolve, reject) => {
     User.update({ password: password }, { where: {uno: uno} })
       .then(() => {
@@ -128,9 +177,12 @@ const updateUser = (uno, password) => {
 }
 
 // 회원을 삭제하는 메소드
-const deleteUser = (uno) => {
+const deleteUser = req => {
+
+  const user_id = req.params.uno;
+
   return new Promise((resolve, reject) => {
-      User.destroy({ where: {uno: uno} })
+      User.destroy({ where: {uno: user_id} })
       .then(() => {
           resolve({ state: true });
       })
@@ -159,8 +211,15 @@ const getToken = (email, password) => {
         subject: 'ggomjaeTitle'   // 토큰 제목
       }, 
       function(err,token){
-        if(err) reject(err);    // 생성 후 콜백함수
-        else resolve(token);
+        if(err) {
+          reject({
+            status: false,
+            message: err
+          });    // 생성 후 콜백함수
+        }else resolve({
+          token,
+          status: true
+        });
       })
   });  // return promise
 }
@@ -174,9 +233,15 @@ const verifytoken = (token) => {
     // 임시 비밀키, verify를 이용하여 유효한지 검사
     jwt.verify(clientToken, jwtObj.secret,(err,decoded) => {
       if(err){
-        reject(err);   // 만료 or 형식에 맞지 않는 경우 ERROR 
+        reject({
+          status: false,
+          message: err
+        });   // 만료 or 형식에 맞지 않는 경우 ERROR 
       }       
-      else resolve(decoded);
+      else resolve({
+        decoded,
+        status: true
+      });
     }); 
   });
 }

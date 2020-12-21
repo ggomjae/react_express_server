@@ -14,9 +14,7 @@ const retrieveAllUser = (req, res) => {
 // 유저를 갖고오는 메소드
 const retrieveUser = (req, res) => {
   
-  const uno = req.params.uno;
-
-  userService.retrieveUser(uno)
+  userService.retrieveUser(req)
   .then((result) => {
       res.status(200).json(result);
   })
@@ -40,7 +38,7 @@ const createUser = (req, res) => {
 // 사용자 로그인하는 메소드는 부르는
 const loginUser = (req, res) => {
   
-  userService.loginUser(req.body.email, req.body.password)
+  userService.loginUser(req)
   .then((success) => {
       res.json(success);
   })
@@ -51,7 +49,7 @@ const loginUser = (req, res) => {
 
 // 패스워드를 업데이트 하는 메소드를 부르는
 const updateUser = (req, res) => {
-  userService.updateUser(req.params.uno, req.body.password)
+  userService.updateUser(req)
   .then((result) => {
       res.status(200).json(result);
   })
@@ -62,7 +60,7 @@ const updateUser = (req, res) => {
 
 // 회원을 삭제하는 메소드를 부르는
 const deleteUser = (req, res) => {
-  userService.deleteUser(req.params.uno)
+  userService.deleteUser(req)
   .then((result) => {
       res.status(200).json(result);
   })
