@@ -1,9 +1,9 @@
-import './App.css';
+import LoginPage from './components/views/LoginPage/LoginPage'
 
 function App() {
   return (
     <div className="App">
-      React Test
+      <LoginPage />
     </div>
   );
 }
