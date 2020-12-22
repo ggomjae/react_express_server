@@ -7,7 +7,7 @@ const retrieveAllUser = (req, res) => {
       res.status(200).json(result);
   })
   .catch((fail) => {
-      res.json(fail);
+      res.json(fail); 
   });
 }
 
@@ -23,7 +23,7 @@ const retrieveUser = (req, res) => {
   });
 }
 
-// 유저를 회원가입하는 메소드를 부르는
+// 유저를 회원가입하는 메소드를 부르는 status 201
 const createUser = (req, res) => {
   
   userService.createUser(req)
@@ -40,7 +40,7 @@ const loginUser = (req, res) => {
   
   userService.loginUser(req)
   .then((success) => {
-      res.json(success);
+      res.status(200).json(success);
   })
   .catch((fail) => {
       res.json(fail);
@@ -58,11 +58,11 @@ const updateUser = (req, res) => {
   });
 }
 
-// 회원을 삭제하는 메소드를 부르는
+// 회원을 삭제하는 메소드를 부르는 status 204
 const deleteUser = (req, res) => {
   userService.deleteUser(req)
   .then((result) => {
-      res.status(200).json(result);
+      res.status(204).end();
   })
   .catch((fail) => {
       res.json(fail);

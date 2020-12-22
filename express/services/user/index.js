@@ -184,7 +184,7 @@ const deleteUser = req => {
   return new Promise((resolve, reject) => {
       User.destroy({ where: {uno: user_id} })
       .then(() => {
-          resolve({ state: true });
+          resolve({ }); // 204이기 때문에 필요없음.
       })
       .catch(() => {
           reject({ state: false });

@@ -4,18 +4,18 @@ const postService = require('../../services/post');
 const retrieveAllPost = (req, res) => {
   postService.retrieveAllPost(req)
   .then((success) => {
-      res.json(success);
+      res.status(200).json(success);
   })
   .catch((fail) => {
       res.json(fail);
   });
 }
 
-// 게시물 만드는 오는 메소드
+// 게시물 만드는 메소드
 const createPost = (req, res) => {
   postService.createPost(req)
   .then((success) => { 
-      res.json(success);
+      res.status(201).json(success);
   })
   .catch((fail) => {
       res.json(fail);
@@ -26,7 +26,7 @@ const createPost = (req, res) => {
 const retrievePost = (req, res) => {
   postService.retrievePost(req)
   .then((success) => { 
-    res.json(success);
+    res.status(200).json(success);
   })
   .catch((fail) => {
       res.json(fail);
@@ -49,7 +49,7 @@ const updatePost = (req, res) => {
 const deletePost = (req, res) => {
   postService.deletePost(req)
   .then((result) => {
-      res.status(200).json(result);
+      res.status(204).end();
   })
   .catch((fail) => {
       res.json(fail);

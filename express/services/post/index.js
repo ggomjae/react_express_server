@@ -103,7 +103,7 @@ const deletePost = req => {
   return new Promise((resolve, reject) => {
       Post.destroy({ where: {pno: post_id} })
       .then(() => {
-          resolve({ status: true });
+          resolve({ }); // 204 보낼 예정이라 필요가없음.
       })
       .catch((err) => {
           reject({ 
