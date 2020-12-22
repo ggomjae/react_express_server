@@ -1,6 +1,21 @@
+REACT + Express  ( ~ing ) 🐻
+============ 
+
+
+-------
+* Author 민경재[ggomjae] <br>
+* 개인 개발 블로그 링크 <https://blog.naver.com/ggomjae> <br>
+
+-------
+
+Fronted ( React )
+============
+
 현재 진행중입니다. <br>
-Express로 서버 개발 -> React 연동 <br>
-2020-12-07 : login까지 <br>
+
+Server ( Express )
+============
+
 
 ```User```와 관계없는 URI
 ```bash
@@ -9,6 +24,7 @@ router.post('/login',userController.loginUser);
 
 ```/users```와 ```/posts```
 ```bash
+
 // User
 router.post('/', userController.createUser);
 router.get('/', userController.retrieveAllUser);
@@ -19,6 +35,10 @@ router.delete('/:uno',auth, userController.deleteUser);
 // Post 
 router.post('/:uno/posts',postController.createPost);
 router.get('/:uno/posts',postController.retrieveAllPost);
+router.get('/:uno/posts/:pno',postController.retrievePost);
+router.patch('/:uno/posts/:pno',postController.updatePost);
+router.delete('/:uno/posts/:pno',postController.deletePost);
+
 ```
 
 ```mocha``` 적용
@@ -28,3 +48,9 @@ router.get('/:uno/posts',postController.retrieveAllPost);
     "start": "node ./express/server.js"
   },
 ```
+
+# 끝맺음
+<br>
+
+> 주기적인 업데이트. <br>
+> 완전한 코드는 Git 위의 코드 부분을 봐주세요. <br>
