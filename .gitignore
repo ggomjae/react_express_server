@@ -1,7 +1,11 @@
   
-# Directories #
-/node_modules
+# server #
+/server/node_modules
 
-/express/config/config.json
-/express/config/dev.js
-/express/config/jwt.js
+/server/express/config/config.json
+/server/express/config/dev.js
+/server/express/config/jwt.js
+
+# fronted 
+/fronted/node_modules
+
