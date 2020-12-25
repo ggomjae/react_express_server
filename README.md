@@ -38,7 +38,14 @@ router.get('/:uno/posts',postController.retrieveAllPost);
 router.get('/:uno/posts/:pno',postController.retrievePost);
 router.patch('/:uno/posts/:pno',postController.updatePost);
 router.delete('/:uno/posts/:pno',postController.deletePost);
+```
 
+```상태```
+```bash
+create : res.status(201).json(success);
+retrieve : res.status(200).json(result);
+update : res.status(200).json(result);
+delete : res.status(204).end();
 ```
 
 ```mocha``` 적용
