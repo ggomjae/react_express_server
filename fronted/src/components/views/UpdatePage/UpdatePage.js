@@ -13,35 +13,25 @@ function UpdatePage(props) {
 
     const dispatch = useDispatch();
     const [newPassword, setNewPassword] = useState("");
-    const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
     const onNewPasswordHandler = (e) => {
         setNewPassword(e.currentTarget.value);
-    }
-
-    const onConfirmNewPasswordHandler = (e) => {
-        setConfirmNewPassword(e.currentTarget.value);
     }
 
     const onLogoutHandler = () => {
         axios.get('/api/user/logout')
         .then(res => {
             if(res.data.logoutSuccess) {
-                alert('비밀번호 변경을 마쳤습니다. \n 새 비밀번호로 다시 로그인 하십시오.');
+                alert('o');
                 props.history.push('/login');
             } else {
-                alert('로그아웃에 실패했습니다.');
+                alert('x');
             }
         });
     }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-
-        if(newPassword !== confirmNewPassword) {
-            alert("새 비밀번호 확인을 정확히 해주십시오!");
-            return;
-        }
 
         let requestBody = {
             password: newPassword
@@ -73,30 +63,11 @@ function UpdatePage(props) {
                             required
                         />
                     </Form.Item>
-
-                    <Form.Item>
-                        <label>새 비밀번호 확인</label>
-                        <Input
-                            id="confirm_new_password"
-                            placeholder="새 비밀번호를 다시 입력하십시오!"
-                            type="password"
-                            value={confirmNewPassword}
-                            onChange={onConfirmNewPasswordHandler}
-                            required
-                        />
-                    </Form.Item>
                     <br />
-
                     <Button type="primary" htmlType="submit">
                         비밀번호 변경
                     </Button>
                 </form>
-                
-                <a style={{textDecoration: 'none'}} href = '/'>
-                    <Button className='cancel_btn'>
-                        취소
-                    </Button>
-                </a>
             </div>
         </div>
     )
