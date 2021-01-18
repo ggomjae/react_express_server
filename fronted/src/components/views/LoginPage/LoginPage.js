@@ -28,13 +28,13 @@ function LoginPage(props) {
     <div className='login_page_wrap'>
       
       <div className='login_container'>
-        <Title>Log In</Title>
+        <Title>로그인</Title>
         <form className='login_form' onSubmit={onSubmitHandler}>
           <Form.Item>
-            <label>Email</label>
+            <label>email</label>
             <Input
               id="email"
-              placeholder="이메일을 입력하십시오."
+              placeholder="이메일을 입력하세요."
               type="email"
               value={email}
               onChange={onEmailHandler}
@@ -43,10 +43,10 @@ function LoginPage(props) {
           </Form.Item>
 
           <Form.Item>
-            <label>Password</label>
+            <label>password</label>
             <Input
               id="password"
-              placeholder="비밀번호를 입력하십시오."
+              placeholder="패스워드를 입력하세요."
               type="password"
               value={password}
               onChange={onPasswordHandler}
